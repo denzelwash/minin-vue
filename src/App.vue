@@ -2,8 +2,15 @@
   <div id="app">
     <component :is="component"></component>
     <div v-if="!component">
-      <router-link to="/login">login</router-link>
-      <router-link to="/categories">categories</router-link>
+      <router-link to="/login">login</router-link> <br>
+      <router-link to="/registration">registration</router-link> <br>
+      <router-link to="/categories">categories</router-link> <br>
+      <router-link to="/detail-card">detail card</router-link> <br>
+      <router-link to="/history">history</router-link> <br>
+      <router-link to="/home">home</router-link> <br>
+      <router-link to="/planning">planning</router-link> <br>
+      <router-link to="/profile">profile</router-link> <br>
+      <router-link to="/record">record</router-link> <br>
     </div>
   </div>
 </template>
@@ -26,5 +33,5 @@ export default {
 </script>
 
 <style lang="scss">
-  
+
 </style>

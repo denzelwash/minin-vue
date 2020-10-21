@@ -54,17 +54,16 @@
 
     <router-view/>
 
-    <div class="fixed-action-btn">
-      <a class="btn-floating btn-large blue" href="#">
-        <i class="large material-icons">add</i>
-      </a>
-    </div>
+    <add-btn></add-btn>
   </div>
 </template>
 
 <script>
+import AddBtn from './add-btn'
 export default {
-
+  components: {
+    AddBtn
+  }
 }
 </script>
 
