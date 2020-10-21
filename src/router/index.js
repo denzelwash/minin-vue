@@ -17,6 +17,12 @@ const routes = [
     component: () => import('../views/Registration.vue')
   },
   {
+    path: '/',
+    name: 'Home',
+    meta: {layout: 'main-layout'},
+    component: () => import('../views/Home.vue')
+  },
+  {
     path: '/categories',
     name: 'Categories',
     meta: {layout: 'main-layout'},
@@ -33,12 +39,6 @@ const routes = [
     name: 'History',
     meta: {layout: 'main-layout'},
     component: () => import('../views/History.vue')
-  },
-  {
-    path: '/home',
-    name: 'Home',
-    meta: {layout: 'main-layout'},
-    component: () => import('../views/Home.vue')
   },
   {
     path: '/planning',
@@ -58,7 +58,7 @@ const routes = [
     meta: {layout: 'main-layout'},
     component: () => import('../views/Record.vue')
   }
-]
+  ]
 
 const router = new VueRouter({
   mode: 'history',
