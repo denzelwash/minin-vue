@@ -5,25 +5,25 @@
         <a href="#" @click.prevent="$emit('burger-click', $event.target.value)">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">12.12.12</span>
+        <span class="black-text">{{ date | formatDate}}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a class="dropdown-trigger black-text" href="#" data-target="dropdown">
+          <a ref="dropdown" class="dropdown-trigger black-text" href="#" data-target="dropdown">
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
           <ul id='dropdown' class='dropdown-content'>
-            <li>
-              <a href="#" class="black-text">
+            <router-link to="/profile" tag="li">
+              <a class="black-text" href="#">
                 <i class="material-icons">account_circle</i>Профиль
               </a>
-            </li>
+            </router-link>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text">
+              <a href="#" class="black-text" @click.prevent="logout">
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
             </li>
@@ -35,13 +35,46 @@
 </template>
 
 <script>
+
 export default {
+  data: () => ({
+    date: new Date(),
+    timer: null,
+    dropdown: null
+  }),
   methods: {
     toggleSidebar() {
       this.$emit('toggleSidebar')
+    },
+    logout() {
+      this.$router.push('/login?message=logout')
+    }
+  },
+  mounted() {
+    this.dropdown = M.Dropdown.init(this.$refs.dropdown);
+    this.timer = setInterval(() => {
+      this.date = new Date()
+    }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
+    this.dropdown.destroy();
+  },
+  filters: {
+    formatDate(value) {
+      return value.toLocaleString("ru", {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timezone: 'UTC',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }) 
     }
   }
 }
+
 </script>
 
 <style>
