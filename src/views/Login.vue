@@ -1,16 +1,18 @@
 <template>
-  <form class="card auth-card">
+  <form ref='auth-form' class="card auth-card" @submit.prevent="signIn">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
-        <input id="email" type="text" class="validate">
+        <input id="email" name="email" type="text" v-model="email" :class="{invalid: $v.email.$error}">
         <label for="email">Email</label>
-        <small class="helper-text invalid">Email</small>
+        <small class="helper-text invalid" v-if="$v.email.$dirty && !$v.email.required">Пожалуйста заполните поле</small>
+        <small class="helper-text invalid" v-else-if="$v.email.$dirty && !$v.email.email">Введите корректный email</small>
       </div>
       <div class="input-field">
-        <input id="password" type="password" class="validate">
+        <input id="password" name="password" type="password" v-model="password" :class="{invalid: $v.password.$error}">
         <label for="password">Пароль</label>
-        <small class="helper-text invalid">Password</small>
+        <small class="helper-text invalid" v-if="$v.password.$dirty && !$v.password.required">Введите пароль</small>
+        <small class="helper-text invalid" v-else-if="$v.password.$dirty && !$v.password.minLength">Пароль должен быть минимум {{ $v.password.$params.minLength.min }} символов, сейчас {{ password.length }}</small>
       </div>
     </div>
     <div class="card-action">
@@ -22,18 +24,47 @@
       </div>
       <p class="center">
         Нет аккаунта?
-        <a href="/">Зарегистрироваться</a>
+        <router-link to="/registration" tag="a">Зарегистрироваться</router-link>
       </p>
     </div>
   </form>
 </template>
 
 <script>
-export default {
+import { required, minLength, email, between } from 'vuelidate/lib/validators'
 
+export default {
+  data: () => ({
+    email: '',
+    password: ''
+  }),
+  methods: {
+    signIn() {
+      this.$v.$touch()
+      if (this.$v.$invalid) return;
+      let formData = {
+        email: this.email,
+        password: this.password
+      }
+      console.log(formData)
+      this.$router.push('/')
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    }
+  }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .card-title {
+    margin-bottom: 2rem !important;
+  }
 </style>
