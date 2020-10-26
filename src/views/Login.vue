@@ -33,6 +33,7 @@
 <script>
 import { required, minLength, email, between } from 'vuelidate/lib/validators'
 import messages from '@/utils/messages.js'
+import {mapActions} from 'vuex'
 
 export default {
   data: () => ({
@@ -40,15 +41,20 @@ export default {
     password: ''
   }),
   methods: {
-    signIn() {
+    ...mapActions('auth', {
+      login: 'login'
+    }),
+    async signIn() {
       this.$v.$touch()
-      if (this.$v.$invalid) return;
+      if (this.$v.$invalid) return
       let formData = {
         email: this.email,
         password: this.password
       }
-      console.log(formData)
-      this.$router.push('/')
+      try {
+        await this.login(formData)
+        this.$router.push('/')
+      } catch(err) {}
     }
   },
   validations: {
