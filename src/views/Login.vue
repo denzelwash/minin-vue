@@ -32,6 +32,7 @@
 
 <script>
 import { required, minLength, email, between } from 'vuelidate/lib/validators'
+import messages from '@/utils/messages.js'
 
 export default {
   data: () => ({
@@ -58,6 +59,12 @@ export default {
     password: {
       required,
       minLength: minLength(6)
+    }
+  },
+  mounted() {
+    const message = messages[this.$route.query.message]
+    if (message) {
+      this.$message(message)
     }
   }
 }

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { required, minLength, email, between } from "vuelidate/lib/validators";
+import { required, minLength, email } from "vuelidate/lib/validators";
 
 export default {
   data: () => ({
@@ -66,7 +66,7 @@ export default {
         name: this.name
       }
       console.dir(formData)
-      // this.$router.push('/')
+      this.$router.push('/login')
     }
   },
   validations: {

@@ -4,8 +4,10 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
+import MessagePlugin from './utils/message.plugin'
 
 Vue.use(Vuelidate)
+Vue.use(MessagePlugin)
 
 import 'materialize-css/dist/css/materialize.min.css'
 import './assets/index.css'
