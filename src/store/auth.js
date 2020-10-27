@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import errors from '@/utils/firebase-error-messages'
 
 export default {
   namespaced: true,
@@ -7,15 +8,15 @@ export default {
   mutations: {
   },
   actions: {
-    async login(context, {email, password}) {
+    async login({commit}, {email, password}) {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
       } catch(err) {
-        console.log(err.code)
+        commit('setError', err, { root: true })
         throw err
       }
     },
-    async register({dispatch}, {email, password, name}) {
+    async register({commit, dispatch}, {email, password, name}) {
       try {
         const data = await firebase.auth().createUserWithEmailAndPassword(email, password)
         const uid = await dispatch('getUid')
@@ -24,7 +25,7 @@ export default {
           bill: 10000
         })
       } catch(err) {
-        console.log(err)
+        commit('setError', err, { root: true })
         throw err
       }
     },
