@@ -48,6 +48,7 @@
 
 <script>
 import { required, minLength, email } from "vuelidate/lib/validators";
+import {mapActions} from 'vuex'
 
 export default {
   data: () => ({
@@ -57,7 +58,10 @@ export default {
     check: ''
   }),
   methods: {
-    registration() {
+    ...mapActions('auth', {
+      register: 'register'
+    }),
+    async registration() {
       this.$v.$touch()
       if (this.$v.$invalid || !this.check) return;
       let formData = {
@@ -65,8 +69,10 @@ export default {
         password: this.password,
         name: this.name
       }
-      console.dir(formData)
-      this.$router.push('/login')
+      try {
+        await this.register(formData)
+        this.$router.push('/')
+      } catch(err) {}
     }
   },
   validations: {

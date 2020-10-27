@@ -23,7 +23,7 @@
             </router-link>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text" @click.prevent="logout">
+              <a href="#" class="black-text" @click.prevent="onLogout">
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
             </li>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 
 export default {
   data: () => ({
@@ -43,10 +44,14 @@ export default {
     dropdown: null
   }),
   methods: {
+    // ...mapActions('auth', {
+    //   logout: 'logout'
+    // }),
     toggleSidebar() {
       this.$emit('toggleSidebar')
     },
-    logout() {
+    async onLogout() {
+      await this.$store.dispatch('auth/logout')
       this.$router.push('/login?message=logout')
     }
   },
