@@ -11,7 +11,7 @@
       <ul class="right hide-on-small-and-down">
         <li>
           <a ref="dropdown" class="dropdown-trigger black-text" href="#" data-target="dropdown">
-            USER NAME
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+// import {mapGetters} from 'vuex'
 
 export default {
   data: () => ({
@@ -43,15 +43,17 @@ export default {
     timer: null,
     dropdown: null
   }),
+  computed: {
+    name() {
+      return this.$store.getters.info.name
+    }
+  },
   methods: {
-    // ...mapActions('auth', {
-    //   logout: 'logout'
-    // }),
     toggleSidebar() {
       this.$emit('toggleSidebar')
     },
     async onLogout() {
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch('logout')
       this.$router.push('/login?message=logout')
     }
   },

@@ -1,8 +1,6 @@
 import firebase from 'firebase/app'
-import errors from '@/utils/firebase-error-messages'
 
 export default {
-  namespaced: true,
   state: {
   },
   mutations: {
@@ -12,7 +10,7 @@ export default {
       try {
         await firebase.auth().signInWithEmailAndPassword(email, password)
       } catch(err) {
-        commit('setError', err, { root: true })
+        commit('setError', err)
         throw err
       }
     },
@@ -25,7 +23,7 @@ export default {
           bill: 10000
         })
       } catch(err) {
-        commit('setError', err, { root: true })
+        commit('setError', err)
         throw err
       }
     },
@@ -33,7 +31,8 @@ export default {
       const user = firebase.auth().currentUser
       return user ? user.uid : null
     },
-    async logout(context) {
+    async logout({commit}) {
+      commit('clearUserInfo')
       await firebase.auth().signOut()
     }
   }

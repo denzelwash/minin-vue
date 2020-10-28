@@ -23,6 +23,7 @@
 import AddBtn from './add-btn'
 import Navbar from './navbar'
 import Sidebar from './sidebar'
+import {mapGetters} from 'vuex'
 
 export default {
   data() {
@@ -35,11 +36,20 @@ export default {
     Navbar,
     Sidebar
   },
+  computed: {
+
+  },
   methods: {
     toggleSidebar() {
       const main = document.querySelector('main')
       main.classList.toggle('full')
       this.sidebar = !this.sidebar
+    }
+  },
+  mounted() {
+    const info = this.$store.getters.info
+    if (!Object.keys(info).length) {
+      this.$store.dispatch('loadUserInfo')
     }
   }
 }

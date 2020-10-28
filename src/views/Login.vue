@@ -41,9 +41,9 @@ export default {
     password: ''
   }),
   methods: {
-    ...mapActions('auth', {
-      login: 'login'
-    }),
+    ...mapActions([
+      'login'
+    ]),
     async signIn() {
       this.$v.$touch()
       if (this.$v.$invalid) return
