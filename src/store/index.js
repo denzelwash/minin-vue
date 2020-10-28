@@ -9,10 +9,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    error: null
+    error: null,
+    loader: false
   },
   getters: {
-    getError: state => state.error
+    error: state => state.error,
+    loader: state => state.loader
   },
   mutations: {
     setError(state, error) {
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     clearError(state) {
       state.error = null
+    },
+    enableLoader(state) {
+      state.loader = true
+    },
+    disableLoader(state) {
+      state.loader = false
     }
   },
   actions: {

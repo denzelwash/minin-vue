@@ -10,50 +10,25 @@
 
     <div class="row">
       <div class="col s12 m6 l4">
-        <div class="card light-blue bill-card">
-          <div class="card-content white-text">
-            <span class="card-title">Счет в валюте</span>
-
-            <p class="currency-line">
-              <span>12.0 Р</span>
-            </p>
-          </div>
-        </div>
+        <homeBill/>
       </div>
 
       <div class="col s12 m6 l8">
-        <div class="card orange darken-3 bill-card">
-          <div class="card-content white-text">
-            <div class="card-header">
-              <span class="card-title">Курс валют</span>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Валюта</th>
-                  <th>Курс</th>
-                  <th>Дата</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>руб</td>
-                  <td>12121</td>
-                  <td>12.12.12</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <homeExchange/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+import homeBill from '@/components/home-bill.vue'
+import homeExchange from '@/components/home-exchange.vue'
 
+export default {
+  components: {
+    homeBill,
+    homeExchange
+  }
 }
 </script>
 
