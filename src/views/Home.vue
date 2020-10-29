@@ -7,7 +7,7 @@
         <i class="material-icons">refresh</i>
       </button>
     </div>
-    <div class="row" v-if="infoLoaded && currencyLoaded">
+    <div class="row" v-if="currency && bill">
       <div class="col s12 m6 l4">
         <homeBill 
           :currency="currency"
@@ -36,21 +36,15 @@ export default {
   data() {
     return {
       currency: null,
-      bill: null
     }
   },
   computed: {
-    infoLoaded() {
-      return this.$store.getters.info
-    },
-    currencyLoaded() {
+    bill() {
       return this.$store.getters.info.bill
     }
   },
   async mounted() {
     this.currency = await this.$store.dispatch('fetchCurrency')
-    this.bill = this.$store.getters.info.bill
-    console.log(this.currency, this.bill)
   }
 }
 </script>

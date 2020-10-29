@@ -24,10 +24,7 @@ export default {
   },
   methods: {
     calcRate(str) {
-      console.log(this.bill)
-      console.log(this.currency.rates['RUB'])
       const base = this.bill / this.currency.rates['RUB']
-      console.log(base * this.currency.rates[str])
       return Math.floor(base * this.currency.rates[str])
     }
   }
