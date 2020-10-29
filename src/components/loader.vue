@@ -22,15 +22,10 @@ export default {};
 
 <style lang="scss" scoped>
   .overlay {
-    left: 0;
-    top: 0;
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5);
-    z-index: 1500;
+    height: 100%;
   }
 </style>

@@ -10,11 +10,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     error: null,
-    loader: false
+    // loader: false
   },
   getters: {
     error: state => state.error,
-    loader: state => state.loader
+    // loader: state => state.loader
   },
   mutations: {
     setError(state, error) {
@@ -23,15 +23,20 @@ export default new Vuex.Store({
     clearError(state) {
       state.error = null
     },
-    enableLoader(state) {
-      state.loader = true
-    },
-    disableLoader(state) {
-      state.loader = false
-    }
+    // enableLoader(state) {
+    //   state.loader = true
+    // },
+    // disableLoader(state) {
+    //   state.loader = false
+    // }
   },
   actions: {
-
+    async fetchCurrency({}) {
+      const key = process.env.VUE_APP_FIXER
+      const currency = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,RUB,EUR&format=1`)
+        .then(response => response.json())
+      return currency
+    }
   },
   modules: {
     auth,

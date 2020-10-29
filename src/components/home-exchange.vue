@@ -25,7 +25,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['rates'],
+};
 </script>
 
 <style>

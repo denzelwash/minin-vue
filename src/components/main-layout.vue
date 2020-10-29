@@ -46,10 +46,10 @@ export default {
       this.sidebar = !this.sidebar
     }
   },
-  mounted() {
+  async mounted() {
     const info = this.$store.getters.info
     if (!Object.keys(info).length) {
-      this.$store.dispatch('loadUserInfo')
+      await this.$store.dispatch('loadUserInfo')
     }
   }
 }
