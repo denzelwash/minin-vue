@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('burger-click', $event.target.value)">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ date | formatDate}}</span>
+        <span class="black-text">{{ date | formatDate('full')}}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">

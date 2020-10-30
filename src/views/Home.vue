@@ -3,7 +3,7 @@
     <div class="page-title">
       <h3>Счет</h3>
 
-      <button class="btn waves-effect waves-light btn-small">
+      <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -15,7 +15,9 @@
       </div>
 
       <div class="col s12 m6 l8">
-        <homeExchange :rates="currency"/>
+        <homeExchange 
+          :currency="currency"
+        />
       </div>
     </div>
     <Loader v-else/>
@@ -41,6 +43,15 @@ export default {
   computed: {
     bill() {
       return this.$store.getters.info.bill
+    }
+  },
+  methods: {
+    async refresh() {
+      this.$store.commit('clearUserInfo')
+      this.currency = null
+      this.currency = await this.$store.dispatch('fetchCurrency')
+      await this.$store.dispatch('loadUserInfo')
+      
     }
   },
   async mounted() {
