@@ -5,7 +5,7 @@
       <p class="currency-line"
         v-for="item in myCurrency"
         :key="item">
-        <span>{{calcRate(item)}} {{ item }}</span>
+        <span>{{calcRate(item) | currencyFilter(item)}}</span>
       </p>
     </div>
   </div>
