@@ -3,18 +3,17 @@ import Vuex from 'vuex'
 
 import auth from './auth'
 import info from './info'
+import category from './category'
 import errors from '@/utils/firebase-error-messages'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    error: null,
-    // loader: false
+    error: null
   },
   getters: {
-    error: state => state.error,
-    // loader: state => state.loader
+    error: state => state.error
   },
   mutations: {
     setError(state, error) {
@@ -22,13 +21,7 @@ export default new Vuex.Store({
     },
     clearError(state) {
       state.error = null
-    },
-    // enableLoader(state) {
-    //   state.loader = true
-    // },
-    // disableLoader(state) {
-    //   state.loader = false
-    // }
+    }
   },
   actions: {
     async fetchCurrency({}) {
@@ -40,6 +33,7 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    info
+    info,
+    category
   }
 })

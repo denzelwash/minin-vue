@@ -37,7 +37,17 @@ export default {
     Sidebar
   },
   computed: {
-
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error(value) {
+      if (value) {
+        this.$error(value)
+        this.$store.commit('clearError')
+      }
+    }
   },
   methods: {
     toggleSidebar() {

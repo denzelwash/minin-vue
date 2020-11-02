@@ -9,13 +9,13 @@
     </div>
     <div class="row" v-if="currency && bill">
       <div class="col s12 m6 l4">
-        <homeBill 
+        <Bill 
           :currency="currency"
         />
       </div>
 
       <div class="col s12 m6 l8">
-        <homeExchange 
+        <Exchange 
           :currency="currency"
         />
       </div>
@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import homeBill from '@/components/home-bill.vue'
-import homeExchange from '@/components/home-exchange.vue'
+import Bill from '@/components/home/bill.vue'
+import Exchange from '@/components/home/exchange.vue'
 import Loader from '@/components/loader';
 
 export default {
   components: {
-    homeBill,
-    homeExchange,
+    Bill,
+    Exchange,
     Loader
   },
   data() {
