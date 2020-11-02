@@ -3,11 +3,15 @@
     <div class="page-subtitle">
       <h4>Редактировать</h4>
     </div>
-    {{newCategory}}
     <form>
       <div class="input-field">
-        <select>
-          <option>Category</option>
+        <select ref="catSelect">
+          {{categories}}
+          <option
+            v-for="item in categories"
+            :key="item.id"
+            :value="item.id"
+          >{{ item.title }}</option>
         </select>
         <label>Выберите категорию</label>
       </div>
@@ -34,7 +38,16 @@
 
 <script>
 export default {
-  props: ['newCategory']
+  props: ['categories'],
+  data: () => ({
+    select: null
+  }),
+  mounted() {
+    this.select = M.FormSelect.init(this.$refs.catSelect);
+  },
+  beforeDestroy() {
+    this.select.destroy()
+  }
 };
 </script>
 
