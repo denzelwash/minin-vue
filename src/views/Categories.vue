@@ -9,7 +9,15 @@
           <Create @newCatAdded="newCatAdded"/>
         </div>
         <div class="col s12 m6">
-          <Edit :categories="categories"/>
+          <Edit
+            v-if="categories.length"
+            :categories="categories" 
+            @updateCat="updateCat"
+            :key="categories.length + updateCounter"
+          />
+          <div class="page-subtitle" v-else>
+            <h4 class="no-category">Нет Категорий</h4>
+          </div>
         </div>
       </div>
       <Loader v-else/>
@@ -26,7 +34,8 @@ export default {
   data: () => ({
     newCategory: null,
     categories: [],
-    loading: true
+    loading: true,
+    updateCounter: 0
   }),
   components: {
     Create,
@@ -36,14 +45,24 @@ export default {
   methods: {
     newCatAdded(category) {
       this.newCategory = category
+      this.updateCat()
+    },
+    async updateCat() {
+      this.categories = await this.$store.dispatch('getCategories')
+      this.updateCounter++
     }
   },
   async mounted() {
-    this.categories = await this.$store.dispatch('getCategories')
+    const categories = await this.$store.dispatch('getCategories')
+    console.log(categories)
+    this.categories = categories ? categories : []
     this.loading = false
   }
 };
 </script>
 
-<style>
+<style scoped>
+  .no-category {
+    text-align: center;
+  }
 </style>
