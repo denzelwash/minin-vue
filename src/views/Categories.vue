@@ -54,7 +54,6 @@ export default {
   },
   async mounted() {
     const categories = await this.$store.dispatch('getCategories')
-    console.log(categories)
     this.categories = categories ? categories : []
     this.loading = false
   }
