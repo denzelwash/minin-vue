@@ -31,7 +31,7 @@
       </p>
 
       <div class="input-field">
-        <input id="amount" type="number" v-model="summ" :class="{invalid: $v.summ.$error}">
+        <input id="amount" type="number" v-model.number="summ" :class="{invalid: $v.summ.$error}">
         <label for="amount">Сумма</label>
         <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.required">Введите сумму</small>
         <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.numeric">Не число</small>
@@ -94,10 +94,24 @@ export default {
       try {
         this.bill = await this.getInfo.bill
         if (!this.canAddOutcome) {
-          this.$error('Недостаточно средств')
+          this.$error(`Недостаточно средств на счете: ${this.summ - this.bill}руб.`)
           return
         }
-        console.log('submit')
+        await this.$store.dispatch('addRecord', {
+          category: this.selectedCategory,
+          summ: this.summ,
+          desc: this.desc,
+          type: this.type,
+          date: new Date().toJSON()
+        })
+        const newBill = this.type === 'income' ?
+          this.bill + this.summ :
+          this.bill - this.summ
+        await this.$store.dispatch('updateInfo', {bill: newBill})
+        this.$message('Запись добавлена')
+        this.summ = 1
+        this.desc = ''
+        this.$v.$reset()
       } catch(e) {}
     }
   },
@@ -106,8 +120,7 @@ export default {
       getInfo: 'info'
     }),
     canAddOutcome() {
-      console.log('222')
-      return this.type === 'income' || this.summ < this.bill
+      return this.type === 'income' || this.summ <= this.bill
     }
   },
   async mounted() {
