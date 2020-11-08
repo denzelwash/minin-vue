@@ -10,14 +10,18 @@
       <div v-else-if="categories.length">
         <div
           v-for="item in categories"
-          :key="item.title"
+          :key="item.id"
         >
-          <p>
+          <p class="d-inline-block">
             <strong>{{ item.title }}</strong>
-            {{ item.balance }} из {{ item.limit }}
+            {{ item.spend | currencyFilter }} из {{ item.limit | currencyFilter }}
           </p>
-          <div class="progress">
-            <div class="determinate green" :style="`width:${item.percents}%`"></div>
+          <div class="progress" v-tooltip="item.tooltip">
+            <div
+              class="determinate" 
+              :class="item.color" 
+              :style="`width:${item.percents}%`"
+            ></div>
           </div>
         </div>
       </div>
@@ -34,6 +38,7 @@
 <script>
 import Loader from '@/components/loader.vue'
 import {mapGetters} from 'vuex'
+import currencyFilter from '@/utils/currency.filter'
 
 export default {
   components: {
@@ -45,7 +50,10 @@ export default {
     categories: []
   }),
   computed: {
-    ...mapGetters(['info'])
+    ...mapGetters(['info']),
+    progressClass() {
+
+    }
   },
   async mounted() {
     try {
@@ -54,13 +62,18 @@ export default {
 
       categories = categories.map(elem => {
         const filteredRecords = records.filter(rec => (rec.category === elem.id && rec.type === 'outcome'))
-        const catSumm = filteredRecords.reduce((total, current) => total - current.summ, elem.limit)
-        let percents = 100 - catSumm / (elem.limit / 100)
-        percents = percents >= 100 ? 100 : percents
+        const spend = filteredRecords.reduce((total, current) => total + current.summ, 0)
+        let percents = Math.round(spend / (elem.limit / 100))
+        let color = percents <= 60 ? 'green' : 
+          percents <= 100 ? 'yellow' : 'red'
+        let balance = elem.limit - spend
+        let tooltip = `${balance >= 0 ? 'Осталось ' + currencyFilter(balance) : 'Лимит превышен на ' + currencyFilter(-balance)}`
         return {
           ...elem,
           percents,
-          balance: catSumm,
+          color,
+          spend: spend,
+          tooltip
         }
       })
       
@@ -72,5 +85,7 @@ export default {
 </script>
 
 <style>
-
+.d-inline-block {
+  display: inline-block;
+}
 </style>

@@ -22,5 +22,13 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .green {
+    background-color: green;
+  }
+  .yellow {
+    background-color: yellow;
+  }
+  .red {
+    background-color: red;
+  }
 </style>

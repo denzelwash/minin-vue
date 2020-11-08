@@ -7,6 +7,7 @@ import Vuelidate from 'vuelidate'
 import MessagePlugin from './utils/message.plugin'
 import currencyFilter from './utils/currency.filter'
 import formatDate from './utils/format-date.filter'
+import tooltipDirective from './directives/tooltip.directive'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -15,6 +16,7 @@ Vue.use(Vuelidate)
 Vue.use(MessagePlugin)
 Vue.filter('currencyFilter', currencyFilter)
 Vue.filter('formatDate', formatDate)
+Vue.directive('tooltip', tooltipDirective)
 
 import 'materialize-css/dist/css/materialize.min.css'
 import './assets/index.css'

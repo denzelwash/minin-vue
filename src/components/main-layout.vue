@@ -15,7 +15,7 @@
       </div>
     </main>
 
-    <add-btn></add-btn>
+    <add-btn v-tooltip="'Добавить запись'"></add-btn>
   </div>
 </template>
 
