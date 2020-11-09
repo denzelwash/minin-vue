@@ -1,4 +1,5 @@
 export default {
   logout: 'Вы вышли из приложения',
-  login: 'Вы вошли'
+  login: 'Вы вошли',
+  authRequired: 'Необходима авторизация'
 }
