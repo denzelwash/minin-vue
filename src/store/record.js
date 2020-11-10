@@ -23,6 +23,16 @@ export default {
         commit('setError', err)
         throw err
       }
+    },
+    async getRecord({dispatch, commit}, payload) {
+      try {
+        const uid = await dispatch('getUid')
+        const record = (await firebase.database().ref(`users/${uid}/records/${payload}`).once('value')).val()
+        return record
+      } catch(e) {
+        commit('setError', err)
+        throw err
+      }
     }
   }
 }

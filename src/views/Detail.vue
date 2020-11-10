@@ -1,27 +1,59 @@
 <template>
   <div>
-    <div class="breadcrumb-wrap">
-      <a href="/history" class="breadcrumb">История</a>
-      <a class="breadcrumb"> Расход </a>
-    </div>
-    <div class="row">
-      <div class="col s12 m6">
-        <div class="card red">
-          <div class="card-content white-text">
-            <p>Описание:</p>
-            <p>Сумма:</p>
-            <p>Категория:</p>
+    <Loader v-if="loading"/>
+    <template v-else>
+      <div class="breadcrumb-wrap">
+        <router-link to="/history" tag="a" class="breadcrumb">История</router-link>
+        <a class="breadcrumb"> {{ type }} </a>
+      </div>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card" :class="colorClass">
+            <div class="card-content white-text">
+              <p>Описание: {{ record.desc }}</p>
+              <p>Сумма: {{ record.summ | currencyFilter}}</p>
+              <p>Категория: {{ record.categoryName }}</p>
 
-            <small>12.12.12</small>
+              <small>{{ new Date(record.date) | formatDate() }}</small>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>  
   </div>
 </template>
 
 <script>
-export default {};
+import Loader from '@/components/loader.vue'
+import formatDate from '@/utils/format-date.filter'
+
+export default {
+  components: {
+    Loader
+  },
+  data: () => ({
+    loading: true,
+    record: null
+  }),
+  computed: {
+    type() {
+      return this.record.type === 'income' ? 'Доход' : "Расход"
+    },
+    colorClass() {
+      return this.record.type === 'income' ? 'green' : "red"
+    }
+  },
+  async mounted() {
+    const id = this.$route.params.id
+    const record = await this.$store.dispatch('getRecord', id)
+    const category = await this.$store.dispatch('getCategory', record.category)
+    this.record = {
+      ...record,
+      categoryName: category.title
+    }
+    this.loading = false
+  }
+};
 </script>
 
 <style>
