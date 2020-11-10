@@ -4,47 +4,51 @@
       <h3>История записей</h3>
     </div>
 
-    <div class="history-chart">
-      <canvas></canvas>
-    </div>
-
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Сумма</th>
-            <th>Дата</th>
-            <th>Категория</th>
-            <th>Тип</th>
-            <th>Открыть</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>1212</td>
-            <td>12.12.32</td>
-            <td>name</td>
-            <td>
-              <span class="white-text badge red">Расход</span>
-            </td>
-            <td>
-              <button class="btn-small btn">
-                <i class="material-icons">open_in_new</i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <Loader v-if="loading"/>
+    <section v-else>
+      <div class="history-chart">
+        <canvas></canvas>
+      </div>
+      <Table
+        v-if="records.length"
+        :records="records"
+        :categories="categories"
+      />
+      <div class="page-subtitle" v-else>
+        <h4>Записей нет</h4>
+        <router-link :to="{name: 'Record'}" tag="button" class="waves-effect waves-light btn">
+          <span>Добавить</span>
+        </router-link>
+      </div>
+    </section> 
   </div>
 </template>
 
 <script>
-export default {
+import Loader from '@/components/loader.vue'
+import Table from '@/components/history/table.vue'
 
+export default {
+  components: {
+    Loader,
+    Table
+  },
+  data: () => ({
+    loading: true,
+    records: [],
+    categories: []
+  }),
+  async mounted() {
+    const records = await this.$store.dispatch('getRecords')
+    this.categories = await this.$store.dispatch('getCategories')
+    this.records = records.map(record => ({
+      ...record,
+      categoryName: this.categories.find(cat => cat.id === record.category).title,
+      recordClass: record.type === 'income' ? 'green' : 'red',
+      recordText: record.type === 'income' ? 'Доход' : 'Расход'
+    }))
+    this.loading = false
+  }
 }
 </script>
 

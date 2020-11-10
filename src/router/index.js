@@ -30,10 +30,10 @@ const routes = [
     component: () => import('../views/Categories.vue')
   },
   {
-    path: '/detail-card',
-    name: 'DetailCard',
+    path: '/detail/:id',
+    name: 'Detail',
     meta: {layout: 'main-layout', auth: true},
-    component: () => import('../views/DetailCard.vue')
+    component: () => import('../views/Detail.vue')
   },
   {
     path: '/history',
