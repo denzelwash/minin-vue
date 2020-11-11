@@ -27,13 +27,12 @@
 <script>
 import Bill from '@/components/home/bill.vue'
 import Exchange from '@/components/home/exchange.vue'
-import Loader from '@/components/loader';
+
 
 export default {
   components: {
     Bill,
-    Exchange,
-    Loader
+    Exchange
   },
   data() {
     return {

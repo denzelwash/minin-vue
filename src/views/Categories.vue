@@ -28,7 +28,7 @@
 <script>
 import Create from '@/components/categories/create.vue'
 import Edit from '@/components/categories/edit.vue'
-import Loader from '@/components/loader';
+
 
 export default {
   data: () => ({
@@ -39,8 +39,7 @@ export default {
   }),
   components: {
     Create,
-    Edit,
-    Loader
+    Edit
   },
   methods: {
     newCatAdded(category) {

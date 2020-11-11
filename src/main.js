@@ -11,7 +11,11 @@ import tooltipDirective from './directives/tooltip.directive'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+import Paginate from 'vuejs-paginate'
+import Loader from "@/components/loader"
 
+Vue.component('Paginate', Paginate)
+Vue.component('Loader', Loader)
 Vue.use(Vuelidate)
 Vue.use(MessagePlugin)
 Vue.filter('currencyFilter', currencyFilter)

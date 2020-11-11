@@ -24,13 +24,10 @@
 </template>
 
 <script>
-import Loader from '@/components/loader.vue'
+
 import formatDate from '@/utils/format-date.filter'
 
 export default {
-  components: {
-    Loader
-  },
   data: () => ({
     loading: true,
     record: null

@@ -25,12 +25,11 @@
 </template>
 
 <script>
-import Loader from '@/components/loader.vue'
+
 import Table from '@/components/history/table.vue'
 
 export default {
   components: {
-    Loader,
     Table
   },
   data: () => ({

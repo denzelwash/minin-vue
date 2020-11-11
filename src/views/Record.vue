@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import Loader from "@/components/loader"
+
 import { required, minValue, numeric} from 'vuelidate/lib/validators'
 import {mapGetters} from 'vuex'
 
@@ -83,9 +83,6 @@ export default {
     desc: {
       required,
     }
-  },
-  components: {
-    Loader
   },
   methods: {
     async submitHandler() {

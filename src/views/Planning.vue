@@ -36,14 +36,11 @@
 </template>
 
 <script>
-import Loader from '@/components/loader.vue'
+
 import {mapGetters} from 'vuex'
 import currencyFilter from '@/utils/currency.filter'
 
 export default {
-  components: {
-    Loader
-  },
   data: () => ({
     loading: true,
     records: [],
