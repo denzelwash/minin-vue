@@ -12,7 +12,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import Paginate from 'vuejs-paginate'
-import Loader from "@/components/loader"
+import Loader from '@/components/loader'
 
 Vue.component('Paginate', Paginate)
 Vue.component('Loader', Loader)
@@ -30,13 +30,13 @@ import 'materialize-css/dist/js/materialize.min.js'
 Vue.config.productionTip = false
 
 firebase.initializeApp({
-  apiKey: "AIzaSyC2BhmEseswfr-aoP6L4j2A5AoxGVPXoqo",
-  authDomain: "denzel-firebase.firebaseapp.com",
-  databaseURL: "https://denzel-firebase.firebaseio.com",
-  projectId: "denzel-firebase",
-  storageBucket: "denzel-firebase.appspot.com",
-  messagingSenderId: "103182615361",
-  appId: "1:103182615361:web:b848c781c65b6d13c657c0"
+  apiKey: 'AIzaSyC2BhmEseswfr-aoP6L4j2A5AoxGVPXoqo',
+  authDomain: 'denzel-firebase.firebaseapp.com',
+  databaseURL: 'https://denzel-firebase.firebaseio.com',
+  projectId: 'denzel-firebase',
+  storageBucket: 'denzel-firebase.appspot.com',
+  messagingSenderId: '103182615361',
+  appId: '1:103182615361:web:b848c781c65b6d13c657c0'
 });
 
 let app

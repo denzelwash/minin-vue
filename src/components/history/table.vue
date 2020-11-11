@@ -29,12 +29,6 @@
         </tr>
       </tbody>
     </table>
-    <paginate
-      :page-count="20"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
-      :container-class="'className'">
-    </paginate>
   </div>
 </template>
 
