@@ -1,6 +1,9 @@
+import store from '../store/'
+
 export default function(value, type) {
   const options = getOptions(type)
-  return (new Intl.DateTimeFormat('ru-RU', options).format(value))
+  const locale = store.getters.info.locale
+  return (new Intl.DateTimeFormat(locale, options).format(value))
 }
 
 function getOptions(type) {

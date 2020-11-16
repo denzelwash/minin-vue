@@ -1,0 +1,12 @@
+{
+  "profileTitle": "Profile",
+  "name": "Name",
+  "required": "Please fill in the field",
+  "update": "Update",
+  "min2": "At least 2 characters",
+  "score": "Bill",
+  "history": "History",
+  "planning": "Planning",
+  "newRecord": "New record",
+  "categories": "Categories"
+}

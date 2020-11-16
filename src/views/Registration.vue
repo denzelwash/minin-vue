@@ -63,7 +63,7 @@ export default {
     }),
     async registration() {
       this.$v.$touch()
-      if (this.$v.$invalid || !this.check) return;
+      if (this.$v.$invalid || !this.check) return
       let formData = {
         email: this.email,
         password: this.password,

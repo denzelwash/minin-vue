@@ -2,7 +2,7 @@
   <ul class="sidenav app-sidenav" :class="{open: sidebarStatus}">
     <router-link
       v-for="(item, index) in links"
-      :key="index"
+      :key="index "
       tag="li"
       :to="item.url">
       <a class="waves-effect waves-orange pointer">{{ item.title }}</a>
@@ -11,38 +11,35 @@
 </template>
 
 <script>
+import localizeFilter from '@/utils/localize.filter'
+
 export default {
   props: ['sidebarStatus'],
   data() {
     return {
       links: [
         {
-          title: 'Счет',
+          title: localizeFilter('score'),
           url: '/'
         },
         {
-          title: 'История',
+          title: localizeFilter('history'),
           url: '/history'
         },
         {
-          title: 'Планирование',
+          title: localizeFilter('planning'),
           url: '/planning'
         },
         {
-          title: 'Новая запись',
+          title: localizeFilter('newRecord'),
           url: '/record'
         },
         {
-          title: 'Категории',
+          title: localizeFilter('categories'),
           url: '/categories'
         }
       ]
     }
-  },
-  computed: {
-    // sidebarStatus() {
-    //   console.log(this.sidebarOpen)
-    // }
   }
 }
 </script>

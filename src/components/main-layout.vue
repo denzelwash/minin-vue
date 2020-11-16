@@ -1,21 +1,24 @@
 <template>
   <div class="app-main-layout">
+    <Loader v-if="loader"/>
+    <template v-else>
+      <navbar
+        @burger-click="toggleSidebar"
+      />
 
-    <navbar
-      @burger-click="toggleSidebar"
-    />
+      <sidebar
+        :sidebarStatus="sidebar"
+        :key="locale"
+      />
 
-    <sidebar
-      :sidebarStatus="sidebar"
-    />
+      <main class="app-content" :class="{full: !sidebar}">
+        <div class="app-page">
+          <router-view/>
+        </div>
+      </main>
 
-    <main class="app-content" :class="{full: !sidebar}">
-      <div class="app-page">
-        <router-view/>
-      </div>
-    </main>
-
-    <add-btn v-tooltip="'Добавить запись'"></add-btn>
+      <add-btn v-tooltip="'Добавить запись'"></add-btn>
+    </template>
   </div>
 </template>
 
@@ -23,12 +26,14 @@
 import AddBtn from './add-btn'
 import Navbar from './navbar'
 import Sidebar from './sidebar'
+import Loader from './loader'
 import {mapGetters} from 'vuex'
 
 export default {
   data() {
     return {
-      sidebar: true
+      sidebar: true,
+      loader: true
     }
   },
   components: {
@@ -39,6 +44,9 @@ export default {
   computed: {
     error() {
       return this.$store.getters.error
+    },
+    locale() {
+      return this.$store.getters.info.locale
     }
   },
   watch: {
@@ -61,10 +69,13 @@ export default {
     if (!Object.keys(info).length) {
       await this.$store.dispatch('loadUserInfo')
     }
+    this.loader = false
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+  .overlay {
+    height: 100vh;
+  }
 </style>

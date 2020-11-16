@@ -1,18 +1,26 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Профиль</h3>
+      <h3>{{ 'profileTitle' | localize }}</h3>
     </div>
 
-    <form class="form">
+    <form class="form" @submit.prevent="formSubmit">
       <div class="input-field">
-        <input id="description" type="text">
-        <label for="description">Имя</label>
-        <span class="helper-text invalid">name</span>
+        <input id="description" type="text" v-model="name" :class="{invalid: $v.name.$error}">
+        <label for="description" :class="{'active': !!name}">{{ 'name' | localize }}</label>
+        <small class="helper-text invalid" v-if="$v.name.$dirty && !$v.name.required">{{'required' | localize}}</small>
+        <small class="helper-text invalid" v-else-if="$v.name.$dirty && !$v.name.minLength">{{'min2' | localize}}</small>
       </div>
-
+      <div class="switch">
+        <label>
+          English
+          <input type="checkbox" v-model="isRuLocale">
+          <span class="lever"></span>
+          Русский
+        </label>
+      </div>
       <button class="btn waves-effect waves-light" type="submit">
-        Обновить
+        {{ 'update' | localize }}
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -20,11 +28,50 @@
 </template>
 
 <script>
-export default {
+import {mapGetters} from 'vuex'
+import {required, minLength} from "vuelidate/lib/validators";
 
+export default {
+  data: () => ({
+    isRuLocale: true,
+    name: '',
+  }),
+  validations: {
+    name: {
+      required,
+      minLength: minLength(2),
+    }
+  },
+  computed: {
+    ...mapGetters(['info']),
+  },
+  methods: {
+    async formSubmit() {
+      this.$v.$touch()
+      if (this.$v.$invalid) return
+      try {
+        await this.$store.dispatch('updateInfo', {name: this.name, locale: this.isRuLocale ? 'ru-RU' : 'en-US'})
+      } catch(e) {}
+    }
+  },
+  watch: {
+    info() {
+      this.name = this.info.name
+      this.isRuLocale = this.info.locale === 'ru-RU' ? true : false
+    }
+  },
+  mounted() {
+    if (this.info) {
+      this.name = this.info.name
+      this.isRuLocale = this.info.locale === 'ru-RU' ? true : false
+    }
+  }
 }
 </script>
 
 <style>
-
+  .switch {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
 </style>
