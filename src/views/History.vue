@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>История записей</h3>
+      <h3>{{ 'recordHistory' | localize }}</h3>
     </div>
 
     <Loader v-if="loading" />
@@ -46,6 +46,7 @@
 import pagination from '@/mixins/pagination.mixin'
 import Table from '@/components/history/table.vue'
 import Chart from '@/components/history/chart.vue'
+import localizeFilter from '@/utils/localize.filter'
 
 export default {
   components: {
@@ -65,7 +66,7 @@ export default {
       ...record,
       categoryName: this.categories.find((cat) => cat.id === record.category).title,
       recordClass: record.type === 'income' ? 'green' : 'red',
-      recordText: record.type === 'income' ? 'Доход' : 'Расход',
+      recordText: record.type === 'income' ? localizeFilter('income') : localizeFilter('outcome'),
     }))
     this.setPagination(this.records)
     this.loading = false
@@ -73,8 +74,11 @@ export default {
 }
 </script>
 
-<style>
-.pagination li a {
-  outline: none;
-}
+<style scoped>
+  .pagination li a {
+    outline: none;
+  }
+  .history-chart {
+    max-width: 400px;
+  }
 </style>

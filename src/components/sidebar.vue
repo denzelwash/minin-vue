@@ -19,7 +19,7 @@ export default {
     return {
       links: [
         {
-          title: localizeFilter('score'),
+          title: localizeFilter('bill'),
           url: '/'
         },
         {

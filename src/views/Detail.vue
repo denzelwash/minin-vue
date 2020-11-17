@@ -3,16 +3,16 @@
     <Loader v-if="loading"/>
     <template v-else>
       <div class="breadcrumb-wrap">
-        <router-link to="/history" tag="a" class="breadcrumb">История</router-link>
-        <a class="breadcrumb"> {{ type }} </a>
+        <router-link to="/history" tag="a" class="breadcrumb">{{ 'history' | localize }}</router-link>
+        <a class="breadcrumb"> {{ record.type | localize }} </a>
       </div>
       <div class="row">
         <div class="col s12 m6">
           <div class="card" :class="colorClass">
             <div class="card-content white-text">
-              <p>Описание: {{ record.desc }}</p>
-              <p>Сумма: {{ record.summ | currencyFilter}}</p>
-              <p>Категория: {{ record.categoryName }}</p>
+              <p>{{ 'description' | localize }}: {{ record.desc }}</p>
+              <p>{{ 'amount' | localize }}: {{ record.summ | currencyFilter}}</p>
+              <p>{{ 'category' | localize }}: {{ record.categoryName }}</p>
 
               <small>{{ new Date(record.date) | formatDate() }}</small>
             </div>
@@ -33,9 +33,6 @@ export default {
     record: null
   }),
   computed: {
-    type() {
-      return this.record.type === 'income' ? 'Доход' : "Расход"
-    },
     colorClass() {
       return this.record.type === 'income' ? 'green' : "red"
     }
