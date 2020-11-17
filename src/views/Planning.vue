@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Планирование</h3>
+      <h3>{{ 'planning' | localize }}</h3>
       <h4>{{ info.bill || '' | currencyFilter }}</h4>
     </div>
 
@@ -14,7 +14,7 @@
         >
           <p class="d-inline-block">
             <strong>{{ item.title }}</strong>
-            {{ item.spend | currencyFilter }} из {{ item.limit | currencyFilter }}
+            {{ item.spend | currencyFilter }} {{ 'of' | localize }} {{ item.limit | currencyFilter }}
           </p>
           <div class="progress" v-tooltip="item.tooltip">
             <div
@@ -39,6 +39,7 @@
 
 import {mapGetters} from 'vuex'
 import currencyFilter from '@/utils/currency.filter'
+import localizeFilter from '@/utils/localize.filter'
 
 export default {
   data: () => ({
@@ -64,7 +65,7 @@ export default {
         let color = percents <= 60 ? 'green' : 
           percents <= 100 ? 'yellow' : 'red'
         let balance = elem.limit - spend
-        let tooltip = `${balance >= 0 ? 'Осталось ' + currencyFilter(balance) : 'Лимит превышен на ' + currencyFilter(-balance)}`
+        let tooltip = `${balance >= 0 ? localizeFilter('left') + ' ' + currencyFilter(balance) : localizeFilter('limitOver') + ' ' + currencyFilter(-balance)}`
         return {
           ...elem,
           percents,

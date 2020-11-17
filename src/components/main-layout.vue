@@ -17,7 +17,7 @@
         </div>
       </main>
 
-      <add-btn v-tooltip="'addRecord'"></add-btn>
+      <add-btn v-tooltip="addRecord"></add-btn>
     </template>
   </div>
 </template>
@@ -28,6 +28,7 @@ import Navbar from './navbar'
 import Sidebar from './sidebar'
 import Loader from './loader'
 import {mapGetters} from 'vuex'
+import localizeFilter from '@/utils/localize.filter'
 
 export default {
   data() {
@@ -47,6 +48,9 @@ export default {
     },
     locale() {
       return this.$store.getters.info.locale
+    },
+    addRecord() {
+      return localizeFilter('addRecord')
     }
   },
   watch: {

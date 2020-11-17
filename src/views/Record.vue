@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новая запись</h3>
+      <h3>{{ 'newRecord' | localize }}</h3>
     </div>
     <Loader v-if="loading"/>
     <form class="form" v-else-if="!loading && categories.length" @submit.prevent="submitHandler">
@@ -13,46 +13,46 @@
             :value="cat.id"
           >{{ cat.title }}</option>
         </select>
-        <label>Выберите категорию</label>
+        <label>{{ 'changeCategory' | localize }}</label>
       </div>
 
       <p>
         <label>
           <input class="with-gap" name="type" type="radio" value="income" v-model="type"/>
-          <span>Доход</span>
+          <span>{{ 'income' | localize}}</span>
         </label>
       </p>
 
       <p>
         <label>
           <input class="with-gap" name="type" type="radio" value="outcome" v-model="type"/>
-          <span>Расход</span>
+          <span>{{ 'outcome' | localize}}</span>
         </label>
       </p>
 
       <div class="input-field">
         <input id="amount" type="number" v-model.number="summ" :class="{invalid: $v.summ.$error}">
-        <label for="amount">Сумма</label>
-        <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.required">Введите сумму</small>
-        <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.numeric">Не число</small>
-        <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.minValue">Минимум 1</small>
+        <label for="amount">{{ 'amount' | localize }}</label>
+        <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.required">{{ 'enterAmount' | localize }}</small>
+        <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.numeric">{{ 'notNumber' | localize }}</small>
+        <small class="helper-text invalid" v-if="$v.summ.$dirty && !$v.summ.minValue">{{ 'min1' | localize }}</small>
       </div>
 
       <div class="input-field">
         <input id="description" type="text" v-model="desc" :class="{invalid: $v.desc.$error}">
-        <label for="description">Описание</label>
-        <small class="helper-text invalid" v-if="$v.desc.$dirty && !$v.desc.required">Добавьте описание</small>
+        <label for="description">{{ 'description' | localize }}</label>
+        <small class="helper-text invalid" v-if="$v.desc.$dirty && !$v.desc.required">{{ 'addDescription' | localize }}</small>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        {{ 'create' | localize }}
         <i class="material-icons right">send</i>
       </button>
     </form>
     <div class="page-subtitle" v-else>
-      <h4>Категорий нет</h4>
+      <h4>{{ 'noCategories' | localize }}</h4>
       <router-link :to="{name: 'Categories'}" tag="button" class="waves-effect waves-light btn">
-        <span>Добавить</span>
+        <span>{{ 'add' | localize }}</span>
       </router-link>
     </div>
   </div>

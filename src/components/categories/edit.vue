@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-subtitle">
-      <h4>Редактировать</h4>
+      <h4>{{ 'edit' | localize }}</h4>
     </div>
     <form @submit.prevent="submitHandler">
       <div class="input-field select-input-field">
@@ -12,25 +12,25 @@
             :value="item.id"
           >{{ item.title }}</option>
         </select>
-        <label>Выберите категорию</label>
+        <label>{{ 'changeCategory' | localize }}</label>
       </div>
 
       <div class="input-field">
         <input id="name-edit" type="text" v-model="title" :class="{invalid: $v.title.$error}"/>
-        <label for="name-edit">Название</label>
-        <small class="helper-text invalid" v-if="$v.title.$dirty && !$v.title.required">Введите название</small>
-        <small class="helper-text invalid" v-else-if="$v.title.$dirty && !$v.title.minLength">Минимум {{ $v.title.$params.minLength.min }} символа, сейчас {{ title.length }}</small>
+        <label for="name-edit">{{ 'title' | localize }}</label>
+        <small class="helper-text invalid" v-if="$v.title.$dirty && !$v.title.required">{{ 'enterTitle' | localize }}</small>
+        <small class="helper-text invalid" v-else-if="$v.title.$dirty && !$v.title.minLength">{{ 'min' | localize }} {{ $v.title.$params.minLength.min }} {{ 'symbolNow' | localize }} {{ title.length }}</small>
       </div>
 
       <div class="input-field">
         <input id="limit-edit" type="number" v-model.number="limit" :class="{invalid: $v.limit.$error}"/>
-        <label for="limit-edit">Лимит</label>
-        <small class="helper-text invalid" v-if="$v.limit.$dirty && !$v.limit.required">Заполните поле</small>
-        <small class="helper-text invalid" v-if="$v.limit.$dirty && !$v.limit.minValue">Минимум {{ $v.limit.$params.minValue.min }}</small>
+        <label for="limit-edit">{{ 'limit' | localize }}</label>
+        <small class="helper-text invalid" v-if="$v.limit.$dirty && !$v.limit.required">{{ 'required' | localize }}</small>
+        <small class="helper-text invalid" v-if="$v.limit.$dirty && !$v.limit.minValue">{{ 'min' | localize }} {{ $v.limit.$params.minValue.min }}</small>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Обновить
+        {{ 'update' | localize }}
         <i class="material-icons right">send</i>
       </button>
     </form>
