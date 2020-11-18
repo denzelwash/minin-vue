@@ -63,9 +63,7 @@ export default {
     check: ''
   }),
   methods: {
-    ...mapActions('auth', {
-      register: 'register'
-    }),
+    ...mapActions(['register']),
     async registration() {
       this.$v.$touch()
       if (this.$v.$invalid || !this.check) return
