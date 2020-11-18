@@ -36,6 +36,11 @@ import messages from '@/utils/messages.js'
 import {mapActions} from 'vuex'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('login')
+    }
+  },
   data: () => ({
     email: '',
     password: ''

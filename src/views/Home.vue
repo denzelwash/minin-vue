@@ -30,6 +30,11 @@ import Exchange from '@/components/home/exchange.vue'
 
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('bill')
+    }
+  },
   components: {
     Bill,
     Exchange

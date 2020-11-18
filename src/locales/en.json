@@ -42,5 +42,7 @@
   "enterTitle": "Enter title",
   "limit": "Limit",
   "symbolNow": "symbol, now",
-  "edit": "Edit"
+  "edit": "Edit",
+  "login": "Login",
+  "registration": "Registration"
 }

@@ -29,9 +29,14 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import {required, minLength} from "vuelidate/lib/validators";
+import {required, minLength} from "vuelidate/lib/validators"
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('profile')
+    }
+  },
   data: () => ({
     isRuLocale: true,
     name: '',

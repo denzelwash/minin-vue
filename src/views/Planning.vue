@@ -42,6 +42,11 @@ import currencyFilter from '@/utils/currency.filter'
 import localizeFilter from '@/utils/localize.filter'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('planning')
+    }
+  },
   data: () => ({
     loading: true,
     records: [],

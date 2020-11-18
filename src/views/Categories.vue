@@ -31,6 +31,11 @@ import Edit from '@/components/categories/edit.vue'
 
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('categories')
+    }
+  },
   data: () => ({
     newCategory: null,
     categories: [],

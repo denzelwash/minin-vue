@@ -28,6 +28,11 @@
 import formatDate from '@/utils/format-date.filter'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('history')
+    }
+  },
   data: () => ({
     loading: true,
     record: null

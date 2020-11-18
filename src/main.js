@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import Vuelidate from 'vuelidate'
 import MessagePlugin from './utils/message.plugin'
+import TitlePlugin from './utils/title.plugin'
 import currencyFilter from './utils/currency.filter'
 import localizeFilter from './utils/localize.filter'
 import formatDate from './utils/format-date.filter'
@@ -14,11 +15,14 @@ import 'firebase/auth'
 import 'firebase/database'
 import Paginate from 'vuejs-paginate'
 import Loader from '@/components/loader'
+import VueMeta from 'vue-meta'
 
 Vue.component('Paginate', Paginate)
 Vue.component('Loader', Loader)
 Vue.use(Vuelidate)
 Vue.use(MessagePlugin)
+Vue.use(TitlePlugin)
+Vue.use(VueMeta)
 Vue.filter('currencyFilter', currencyFilter)
 Vue.filter('formatDate', formatDate)
 Vue.filter('localize', localizeFilter)

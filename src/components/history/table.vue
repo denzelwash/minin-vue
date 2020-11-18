@@ -22,7 +22,7 @@
             <span class="white-text badge" :class="record.recordClass">{{ record.recordText }}</span>
           </td>
           <td>
-            <button class="btn-small btn" @click="$router.push('/detail/' + record.id)" v-tooltip="'more'">
+            <button class="btn-small btn" @click="$router.push('/detail/' + record.id)" v-tooltip="tooltip">
               <i class="material-icons">open_in_new</i>
             </button>
           </td>
@@ -33,8 +33,15 @@
 </template>
 
 <script>
+import localizeFilter from '@/utils/localize.filter'
+
 export default {
-  props: ['records', 'categories']
+  props: ['records', 'categories'],
+  computed: {
+    tooltip() {
+      return localizeFilter('more')
+    }
+  }
 };
 </script>
 

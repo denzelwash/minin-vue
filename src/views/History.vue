@@ -49,6 +49,11 @@ import Chart from '@/components/history/chart.vue'
 import localizeFilter from '@/utils/localize.filter'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('history')
+    }
+  },
   components: {
     Table,
     Chart

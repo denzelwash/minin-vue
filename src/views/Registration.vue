@@ -51,6 +51,11 @@ import { required, minLength, email } from "vuelidate/lib/validators";
 import {mapActions} from 'vuex'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.$title('registration')
+    }
+  },
   data: () => ({
     email: '',
     password: '',
